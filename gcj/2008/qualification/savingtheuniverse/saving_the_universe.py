@@ -1,22 +1,35 @@
-import gcj_util
-[cases, input] = gcj_util.ReadInput('in.txt')
-index = 0
-for case in xrange(1,cases+1):
-    S = int(input[index])
-    index += 1
-    engines = set()
-    for i in xrange(0,S):
-        engines.add(input[index])
-        index += 1
-    Q = int(input[index])
-    index += 1
-    queries = list()
-    for i in xrange(0, Q):
-        queries.append(input[index])
-        index += 1
-    #print queries
-    #print engines
+class Case():
+    def __init__(self, _engines, _queries):
+        self.engines = _engines
+        self.queries = _queries
+
+
+def parse_input(filename):
+    data = [ x.strip() for x in open(filename, 'r').readlines() ]
+    num_cases = int(data.pop(0))
+    cases = list()
+    for case in xrange(0, num_cases):
+        engines = list()
+        queries = list()
+
+        num_engines = int(data.pop(0))
+        for i in xrange(0, num_engines):
+            engine = data.pop(0)
+            engines.append(engine)
+
+        num_queries = int(data.pop(0))
+        for i in xrange(0, num_queries):
+            query = data.pop(0)
+            queries.append(query)
+        cases.append(Case(engines, queries))
+    return cases
+
+
+def num_switches(case):
     switches = 0
+    engines = case.engines
+    queries = case.queries
+
     round_engines = set()
     for query in queries:
         round_engines.add(query)
@@ -24,5 +37,15 @@ for case in xrange(1,cases+1):
             switches += 1
             round_engines = set()
             round_engines.add(query)
-    print("Case #%s: %s" % (case, switches))
-        
+    return switches
+
+
+if __name__ == "__main__":
+    import sys
+    cases = parse_input(sys.argv[1])
+    casenum = 1
+    for case in cases:
+        switches = num_switches(case)
+        print("Case %d: %d" % (casenum, switches))
+        casenum += 1
+
