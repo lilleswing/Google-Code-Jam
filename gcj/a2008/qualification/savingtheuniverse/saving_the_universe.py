@@ -8,17 +8,17 @@ def parse_input(filename):
     data = [ x.strip() for x in open(filename, 'r').readlines() ]
     num_cases = int(data.pop(0))
     cases = list()
-    for case in xrange(0, num_cases):
+    for case in xrange(num_cases):
         engines = list()
         queries = list()
 
         num_engines = int(data.pop(0))
-        for i in xrange(0, num_engines):
+        for i in xrange(num_engines):
             engine = data.pop(0)
             engines.append(engine)
 
         num_queries = int(data.pop(0))
-        for i in xrange(0, num_queries):
+        for i in xrange(num_queries):
             query = data.pop(0)
             queries.append(query)
         cases.append(Case(engines, queries))
@@ -43,9 +43,9 @@ def num_switches(case):
 if __name__ == "__main__":
     import sys
     cases = parse_input(sys.argv[1])
-    casenum = 1
+    case_num = 1
     for case in cases:
         switches = num_switches(case)
-        print("Case %d: %d" % (casenum, switches))
-        casenum += 1
+        print("Case %d: %d" % (case_num, switches))
+        case_num += 1
 
