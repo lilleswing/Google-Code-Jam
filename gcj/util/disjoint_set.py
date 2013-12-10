@@ -12,3 +12,6 @@ class DisjointSet():
 
     def union(self, p, q):
         self.rep[self.find(p)] = self.find(q)
+
+    def __len__(self):
+        return len(set([self.find(x) for x in self.rep.values()]))
