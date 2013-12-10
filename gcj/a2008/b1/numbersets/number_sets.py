@@ -56,8 +56,13 @@ if __name__ == "__main__":
     import sys
 
     cases = parse_input(sys.argv[1])
+    outfile_name = sys.argv[1].split('.')[0] + ".out"
+    fout = open(outfile_name, 'w')
     case_num = 1
     for case in cases:
         result = solve_case(case)
-        print("Case %d: %d" % (case_num, result))
+        message = "Case #%d: %d" % (case_num, result)
+        print(message)
+        fout.write("%s\n" % message)
         case_num += 1
+    fout.close()
