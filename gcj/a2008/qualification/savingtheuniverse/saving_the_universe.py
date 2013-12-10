@@ -48,4 +48,3 @@ if __name__ == "__main__":
         switches = num_switches(case)
         print("Case %d: %d" % (case_num, switches))
         case_num += 1
-
