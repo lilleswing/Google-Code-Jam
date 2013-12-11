@@ -2,3 +2,5 @@
 *.pyc
 *.class
 *.iml
+out/*
+java-gcj/target
