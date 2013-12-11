@@ -1,7 +1,7 @@
 import util.maths as maths
-from util.disjoint_set import DisjointSet
+from util.disjoint_set import UnionFind
 
-primes = maths.sieve(500001)
+primes = maths.sieve(1000001)
 
 
 class Case():
@@ -12,14 +12,14 @@ class Case():
         self.interval = range(self.lower, self.upper+1)
 
     def get_interior_values(self, prime):
-        values = set()
+        values = list()
         start = case.lower/prime
         val = start * prime
         while val <= case.upper:
             if self.inside(val):
-                values.add(val)
+                values.append(val)
             val += prime
-        return list(values)
+        return values
 
     def inside(self, i):
         return self.lower <= i <= self.upper
@@ -40,12 +40,16 @@ def parse_input(filename):
 
 def solve_case(case):
     global primes
-    case_primes = filter(lambda x: case.min_prime <= x <= case.lower/2 + 1, primes)
-    disjoint_set = DisjointSet(case.interval)
+    upper_bound = (case.upper - case.lower)
+    case_primes = filter(lambda x: case.min_prime <= x <= upper_bound, primes)
+    disjoint_set = UnionFind()
+    disjoint_set.insert_objects(case.interval)
 
     for prime in case_primes:
         interior_values = case.get_interior_values(prime)
         if len(interior_values) <= 1:
+            continue
+        if len(interior_values) == 0:
             break
         for value in interior_values[1:]:
             disjoint_set.union(interior_values[0], value)
@@ -61,7 +65,7 @@ if __name__ == "__main__":
     case_num = 1
     for case in cases:
         result = solve_case(case)
-        message = "Case #%d: %d" % (case_num, result)
+        message = "Case #%d: %s" % (case_num, result)
         print(message)
         fout.write("%s\n" % message)
         case_num += 1
