@@ -27,7 +27,7 @@ public class NumberSets extends Problem<Case> {
         long upperBound = aCase.getUpper() - aCase.getLower();
         final Set<Long> elements = createElements(aCase.getLower(), aCase.getUpper());
 
-        final UnionFind<Long> unionFind = new UnionFind<Long>(elements);
+        final UnionFind<Long> unionFind = new UnionFind<>(elements);
         for(long prime: primes) {
             if(prime < aCase.getMinPrime()) {
                 continue;

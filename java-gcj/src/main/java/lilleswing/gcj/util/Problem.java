@@ -64,5 +64,4 @@ public abstract class Problem<T> {
         }
         return data;
     }
-
 }
