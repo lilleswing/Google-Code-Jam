@@ -3,7 +3,6 @@
  */
 package lilleswing.gcj.a2008.b1.numbersets;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lilleswing.gcj.util.Problem;
@@ -28,7 +27,7 @@ public class NumberSets extends Problem<Case> {
         long upperBound = aCase.getUpper() - aCase.getLower();
         final Set<Long> elements = createElements(aCase.getLower(), aCase.getUpper());
 
-        final UnionFind unionFind = new UnionFind(elements);
+        final UnionFind<Long> unionFind = new UnionFind<Long>(elements);
         for(long prime: primes) {
             if(prime < aCase.getMinPrime()) {
                 continue;
