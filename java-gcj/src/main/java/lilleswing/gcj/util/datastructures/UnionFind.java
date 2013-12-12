@@ -34,6 +34,7 @@ package lilleswing.gcj.util.datastructures;/* ==================================
  */
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -159,6 +160,15 @@ public class UnionFind<T>
             parentMap.put(parent2, parent1);
             rankMap.put(parent1, rank1 + 1);
         }
+    }
+
+    public long size() {
+        final Set<T> set = new HashSet<T>();
+        for(T t: parentMap.keySet()) {
+            final T leader = this.find(t);
+            set.add(leader);
+        }
+        return set.size();
     }
 }
 

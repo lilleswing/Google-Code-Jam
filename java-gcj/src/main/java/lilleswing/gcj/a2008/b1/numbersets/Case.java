@@ -3,6 +3,10 @@
  */
 package lilleswing.gcj.a2008.b1.numbersets;
 
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
 class Case {
     private long minPrime;
     private long upper;
@@ -12,6 +16,20 @@ class Case {
         this.lower = lower;
         this.upper = upper;
         this.minPrime = minPrime;
+    }
+
+    public List<Long> getInterior(final long prime) {
+        final List<Long> values = Lists.newArrayList();
+        final long start = this.lower/prime;
+        long value = start * prime;
+        while(value < this.lower) {
+            value += prime;
+        }
+        while(value <= this.upper) {
+            values.add(value);
+            value += prime;
+        }
+        return values;
     }
 
     long getMinPrime() {
