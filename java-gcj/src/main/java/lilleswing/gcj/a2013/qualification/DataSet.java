@@ -9,4 +9,8 @@ class DataSet {
     public DataSet(final char[][] board) {
         this.board = board;
     }
+
+    public char[][] getBoard() {
+        return board;
+    }
 }
