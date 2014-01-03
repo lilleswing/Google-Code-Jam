@@ -34,8 +34,8 @@ public class TicTacTomek extends Problem<DataSet> {
             for(int j = 0; j < 4; j++) {
                 four[j] = board[j][i];
             }
-            if(!check(board[i]).equals(UNKNOWN)) {
-                return check(board[i]);
+            if(!check(four).equals(UNKNOWN)) {
+                return check(four);
             }
         }
 
