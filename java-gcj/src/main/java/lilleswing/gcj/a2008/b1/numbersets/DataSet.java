@@ -7,12 +7,12 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-class Case {
+class DataSet {
     private long minPrime;
     private long upper;
     private long lower;
 
-    public Case(long lower, long upper, long minPrime) {
+    public DataSet(long lower, long upper, long minPrime) {
         this.lower = lower;
         this.upper = upper;
         this.minPrime = minPrime;

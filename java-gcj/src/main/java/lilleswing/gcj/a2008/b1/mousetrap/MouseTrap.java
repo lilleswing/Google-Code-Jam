@@ -7,19 +7,19 @@ import java.util.List;
 /**
  * TODO(Leswing)
  */
-public class MouseTrap extends Problem<Case> {
+public class MouseTrap extends Problem<Dataset> {
+
     @Override
-    public String solve(Case aCase) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public String solve(Dataset aDataset) {
+        return aDataset.placeCards();
     }
 
     @Override
-    public List<Case> parse(List<String> data) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<Dataset> parse(List<String> data) {
+        return null;
     }
 
     @Override
     public void precompute() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

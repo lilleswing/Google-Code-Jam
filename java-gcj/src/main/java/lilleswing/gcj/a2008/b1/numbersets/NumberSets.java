@@ -11,9 +11,10 @@ import lilleswing.gcj.util.math.PrimeSieve;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
-public class NumberSets extends Problem<Case> {
+public class NumberSets extends Problem<DataSet> {
 
     private List<Long> primes;
 
@@ -23,19 +24,19 @@ public class NumberSets extends Problem<Case> {
     }
 
     @Override
-    public String solve(Case aCase) {
-        long upperBound = aCase.getUpper() - aCase.getLower();
-        final Set<Long> elements = createElements(aCase.getLower(), aCase.getUpper());
+    public String solve(DataSet aDataSet) {
+        long upperBound = aDataSet.getUpper() - aDataSet.getLower();
+        final Set<Long> elements = createElements(aDataSet.getLower(), aDataSet.getUpper());
 
         final UnionFind<Long> unionFind = new UnionFind<>(elements);
         for(long prime: primes) {
-            if(prime < aCase.getMinPrime()) {
+            if(prime < aDataSet.getMinPrime()) {
                 continue;
             }
             if(prime > upperBound) {
                 break;
             }
-            final List<Long> innerValues = aCase.getInterior(prime);
+            final List<Long> innerValues = aDataSet.getInterior(prime);
             for(long value: innerValues) {
                 unionFind.union(innerValues.get(0), value);
             }
@@ -52,19 +53,19 @@ public class NumberSets extends Problem<Case> {
     }
 
     @Override
-    public List<Case> parse(List<String> data) {
+    public List<DataSet> parse(List<String> data) {
         final Iterator<String> iterator = data.iterator();
-        final List<Case> cases = Lists.newArrayList();
+        final List<DataSet> dataSets = Lists.newArrayList();
         final int numCases = Integer.parseInt(iterator.next());
         for(int i = 0; i < numCases; i++ ) {
-            final String[] vals = iterator.next().split(" ");
-            long lower = Long.parseLong(vals[0]);
-            long upper = Long.parseLong(vals[1]);
-            long minPrime = Long.parseLong(vals[2]);
-            final Case aCase = new Case(lower, upper, minPrime);
-            cases.add(aCase);
+            Scanner sc = new Scanner(iterator.next());
+            long lower = sc.nextLong();
+            long upper = sc.nextLong();
+            long minPrime = sc.nextLong();
+            final DataSet aDataSet = new DataSet(lower, upper, minPrime);
+            dataSets.add(aDataSet);
         }
-        return cases;
+        return dataSets;
     }
 
     public static void main(String[] args) {
