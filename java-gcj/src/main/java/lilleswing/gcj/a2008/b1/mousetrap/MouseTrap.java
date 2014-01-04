@@ -8,9 +8,10 @@ import java.util.List;
  * TODO(Leswing)
  */
 public class MouseTrap extends Problem<Dataset> {
+
     @Override
-    public String solve(Dataset dataset) {
-        return null;
+    public String solve(Dataset aDataset) {
+        return aDataset.placeCards();
     }
 
     @Override
