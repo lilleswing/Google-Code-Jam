@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * TODO(Leswing)
  */
-public class MouseTrap extends Problem {
+public class MouseTrap extends Problem<Object> {
 
     @Override
     public String solve(Object o) {

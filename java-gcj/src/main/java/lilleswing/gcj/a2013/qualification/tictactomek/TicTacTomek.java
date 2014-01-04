@@ -6,6 +6,8 @@ package lilleswing.gcj.a2013.qualification.tictactomek;
 import com.google.common.collect.Lists;
 import lilleswing.gcj.util.Problem;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -25,13 +27,14 @@ public class TicTacTomek extends Problem<DataSet> {
         final List<DataSet> dataSets = Lists.newArrayList();
         final int numCases = Integer.parseInt(iterator.next());
         for(int i = 0; i< numCases; i++) {
-            final Scanner sc = new Scanner(iterator.next());
-            final char[][] board = new char[4][];
+            final char[][] board = new char[4][4];
             for(int j = 0; j < 4; j++) {
+                final String line = iterator.next();
                 for(int k = 0; k < 4; k++) {
-                    board[j][k] = sc.next(".").charAt(0);
+                    board[j][k] = line.charAt(k);
                 }
             }
+            iterator.next();
             dataSets.add(new DataSet(board));
         }
         return dataSets;
