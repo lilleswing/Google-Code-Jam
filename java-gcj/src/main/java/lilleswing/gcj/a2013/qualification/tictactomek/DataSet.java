@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 Schrodinger, Inc.  All Rights Reserved.
  */
-package lilleswing.gcj.a2013.qualification;
+package lilleswing.gcj.a2013.qualification.tictactomek;
 
 class DataSet {
     private final char[][] board;

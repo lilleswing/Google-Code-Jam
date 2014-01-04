@@ -7,15 +7,15 @@ import java.util.List;
 /**
  * TODO(Leswing)
  */
-public class MouseTrap extends Problem<Dataset> {
+public class MouseTrap extends Problem {
 
     @Override
-    public String solve(Dataset aDataset) {
-        return aDataset.placeCards();
+    public String solve(Object o) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public List<Dataset> parse(List<String> data) {
+    public List parse(List<String> data) {
         return null;
     }
 

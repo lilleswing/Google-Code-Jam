@@ -171,5 +171,3 @@ public class UnionFind<T>
         return set.size();
     }
 }
-
-// End UnionFind.java
