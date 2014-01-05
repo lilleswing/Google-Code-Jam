@@ -4,3 +4,4 @@
 *.iml
 out/*
 java-gcj/target
+*.out
