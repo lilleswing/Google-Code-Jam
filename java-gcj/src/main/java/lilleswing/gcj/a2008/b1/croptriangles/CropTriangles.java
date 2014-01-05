@@ -47,12 +47,11 @@ public class CropTriangles extends Problem<Case> {
     }
 
     @Override
-    public List<Case> parse(List<String> data) {
-        final Iterator<String> iterator = data.iterator();
+    public List<Case> parse(String data) {
+        final Scanner sc = new Scanner(data);
         final List<Case> cases = Lists.newArrayList();
-        long num_cases = Long.parseLong(iterator.next());
+        long num_cases = sc.nextLong();
         for (int case_num = 0; case_num < num_cases; case_num++) {
-            Scanner sc = new Scanner(iterator.next());
             final Case aCase = new Case(sc.nextLong(), sc.nextLong(), sc.nextLong(), sc.nextLong(),
                     sc.nextLong(), sc.nextLong(), sc.nextLong(), sc.nextLong());
             cases.add(aCase);

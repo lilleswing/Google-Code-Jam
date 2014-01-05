@@ -30,19 +30,17 @@ public class Lawnmower extends Problem<Dataset> {
     }
 
     @Override
-    public List<Dataset> parse(List<String> data) {
-        final Iterator<String> iterator = data.iterator();
+    public List<Dataset> parse(final String data) {
+        final Scanner sc = new Scanner(data);
         final List<Dataset> dataSets = Lists.newArrayList();
-        final int numCases = Integer.parseInt(iterator.next());
+        final int numCases = sc.nextInt();
         for (int i = 0; i < numCases; i++) {
-            final Scanner sc = new Scanner(iterator.next());
             final int height = sc.nextInt();
             final int width = sc.nextInt();
             int[][] lawn = new int[height][width];
             for(int h = 0; h < height; h++) {
-                final Scanner sc1 = new Scanner(iterator.next());
                 for(int w = 0; w < width; w++) {
-                    lawn[h][w] = sc1.nextInt();
+                    lawn[h][w] = sc.nextInt();
                 }
             }
             dataSets.add(new Dataset(lawn));

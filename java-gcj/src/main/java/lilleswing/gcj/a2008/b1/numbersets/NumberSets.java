@@ -53,12 +53,11 @@ public class NumberSets extends Problem<DataSet> {
     }
 
     @Override
-    public List<DataSet> parse(List<String> data) {
-        final Iterator<String> iterator = data.iterator();
+    public List<DataSet> parse(String data) {
+        Scanner sc = new Scanner(data);
         final List<DataSet> dataSets = Lists.newArrayList();
-        final int numCases = Integer.parseInt(iterator.next());
+        final int numCases = sc.nextInt();
         for(int i = 0; i < numCases; i++ ) {
-            Scanner sc = new Scanner(iterator.next());
             long lower = sc.nextLong();
             long upper = sc.nextLong();
             long minPrime = sc.nextLong();

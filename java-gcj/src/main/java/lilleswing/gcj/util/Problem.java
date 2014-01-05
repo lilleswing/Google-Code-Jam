@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public abstract class Problem<T> {
     public abstract String solve(T t);
-    public abstract List<T> parse(final List<String> data);
+    public abstract List<T> parse(final String data);
     public abstract void precompute();
 
     public void display(final List<String> results, final String filename) {
@@ -32,6 +32,8 @@ public abstract class Problem<T> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             IOUtils.closeQuietly(writer);
         }
@@ -39,7 +41,7 @@ public abstract class Problem<T> {
 
     public void main(String filename) {
         precompute();
-        final List<String> data = readLines(filename);
+        final String data = readLines(filename);
         final List<T> cases = parse(data);
         final List<String> results = Lists.transform(cases, new Function<T, String>() {
             @Override
@@ -50,18 +52,14 @@ public abstract class Problem<T> {
         display(results, filename);
     }
 
-    private List<String> readLines(final String filename) {
-        Scanner sc = null;
+    private String readLines(final String filename) {
         try {
-            sc = new Scanner(new File(filename));
+            final String content = new Scanner(new File(filename)).useDelimiter("\\Z").next();
+            return content;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        final List<String> data = Lists.newArrayList();
-        while(sc.hasNextLine()) {
-            data.add(sc.nextLine());
-        }
-        return data;
+        return null;
     }
 }

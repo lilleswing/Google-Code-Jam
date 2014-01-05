@@ -92,19 +92,19 @@ public class TicTacTomek extends Problem<DataSet> {
     }
 
     @Override
-    public List<DataSet> parse(final List<String> data) {
-        final Iterator<String> iterator = data.iterator();
+    public List<DataSet> parse(final String data) {
+        final Scanner sc = new Scanner(data);
         final List<DataSet> dataSets = Lists.newArrayList();
-        final int numCases = Integer.parseInt(iterator.next());
+        final int numCases = sc.nextInt();
         for(int i = 0; i< numCases; i++) {
             final char[][] board = new char[4][4];
             for(int j = 0; j < 4; j++) {
-                final String line = iterator.next();
+                final String line = sc.nextLine();
                 for(int k = 0; k < 4; k++) {
                     board[j][k] = line.charAt(k);
                 }
             }
-            iterator.next();
+            sc.nextLine();
             dataSets.add(new DataSet(board));
         }
         return dataSets;

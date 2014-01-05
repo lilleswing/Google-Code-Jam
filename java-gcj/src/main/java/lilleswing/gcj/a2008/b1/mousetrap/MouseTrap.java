@@ -7,19 +7,6 @@ import java.util.List;
 /**
  * TODO(Leswing)
  */
-public class MouseTrap extends Problem<Object> {
+public class MouseTrap {
 
-    @Override
-    public String solve(Object o) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List parse(List<String> data) {
-        return null;
-    }
-
-    @Override
-    public void precompute() {
-    }
 }
