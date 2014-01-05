@@ -12,26 +12,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+/**
+ * For isGood, create graph where each key is a node
+ * Each chest is multiple edges from opening key to every new key
+ * For each key that we need to prove we can get to
+ *  Find shortest path from any starting to the one we need to get to
+ *  (Think I can do this with modified djiskra)
+ */
 public class Dataset {
-    private final List<Chest> closedChests;
-    private final List<Chest> openedChests;
+    private final List<Chest> chests;
     private List<String> startKeys;
 
-    public Dataset(List<String> startKeys, List<Chest> closedChests) {
+    public Dataset(List<String> startKeys, List<Chest> chests) {
         this.startKeys = startKeys;
-        this.closedChests = closedChests;
-        this.openedChests = Lists.newArrayList();
+        this.chests = chests;
     }
 
-
-    public boolean canOpen(Chest chest, final List<String> startKeys) {
+    public boolean canOpen(Chest chest, final List<String> keys) {
         if(chest.isOpen()) {
             return false;
         }
-        if(!closedChests.contains(chest)) {
+        if(!chests.contains(chest)) {
             return false;
         }
-        if(!startKeys.contains(chest.getOpenKey())) {
+        if(!keys.contains(chest.getOpenKey())) {
             return false;
         }
         return true;
@@ -40,8 +45,7 @@ public class Dataset {
     public void openChest(Chest chest) {
         startKeys.remove(chest.getOpenKey());
         startKeys.addAll(chest.getContainedKeys());
-        closedChests.remove(chest);
-        openedChests.add(chest);
+        chest.open();
     }
 
     public void unopenChest(final Chest chest) {
@@ -49,8 +53,8 @@ public class Dataset {
         for(String key: chest.getContainedKeys()) {
             this.startKeys.remove(key);
         }
-        openedChests.remove(chest);
-        closedChests.add(chest);
+        chests.add(chest);
+        chest.unopen();
     }
 
     /**
@@ -65,7 +69,7 @@ public class Dataset {
             }
             availableKeys.put(key, availableKeys.get(key)+1);
         }
-        for(Chest chest: closedChests) {
+        for(Chest chest: chests) {
             if(!neededKeys.containsKey(chest.getOpenKey())) {
                 neededKeys.put(chest.getOpenKey(), 0);
             }
@@ -98,7 +102,7 @@ public class Dataset {
         if(neededKeys.isEmpty()) {
             return true;
         }
-        for(Chest chest: closedChests) {
+        for(Chest chest: chests) {
             if(!canOpen(chest, startKeys)) {
                 continue;
             }
@@ -144,7 +148,7 @@ public class Dataset {
      */
     public boolean isGood() {
         final Set<String> neededKeys = Sets.newHashSet();
-        for(Chest chest: closedChests) {
+        for(Chest chest: chests) {
             neededKeys.add(chest.getOpenKey());
         }
         neededKeys.removeAll(startKeys);
@@ -156,25 +160,16 @@ public class Dataset {
         return startKeys;
     }
 
-    public List<Chest> getClosedChests() {
-        return closedChests;
+    public List<Chest> getChests() {
+        return chests;
     }
 
-    public List<Chest> getOpenedChests() {
-        return openedChests;
-    }
-
-    private Chest getChest(int chestNum) {
-        for(Chest chest: closedChests) {
-            if(chest.getChestNum() == chestNum) {
-                return chest;
+    public boolean hasOpenChests() {
+        for(Chest chest: chests) {
+            if(!chest.isOpen()) {
+                return true;
             }
         }
-        for(Chest chest: openedChests) {
-            if(chest.getChestNum() == chestNum) {
-                return chest;
-            }
-        }
-        return null;
+        return false;
     }
 }

@@ -6,7 +6,6 @@ package lilleswing.gcj.a2013.qualification.treasure;
 import com.google.common.collect.Lists;
 import lilleswing.gcj.util.Problem;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,9 +21,7 @@ public class Treasure extends Problem<Dataset> {
         boolean openedThisRound;
         do {
             openedThisRound = false;
-            final List<Chest> trialChests = Lists.newArrayList(dataset.getClosedChests());
-            Collections.sort(trialChests);
-            for (Chest chest : trialChests) {
+            for (Chest chest : dataset.getChests()) {
                 if (!dataset.canOpen(chest, dataset.getStartKeys())) {
                     continue;
                 }
@@ -37,9 +34,9 @@ public class Treasure extends Problem<Dataset> {
                     dataset.unopenChest(chest);
                 }
             }
-        } while (!dataset.getClosedChests().isEmpty() && openedThisRound);
+        } while (dataset.hasOpenChests() && openedThisRound);
 
-        if(!dataset.getClosedChests().isEmpty()) {
+        if(!dataset.getChests().isEmpty()) {
             return IMPOSSIBLE;
         }
         return order.toString().replaceAll("\\[" ,"").replaceAll("\\]","").replaceAll(",","");
