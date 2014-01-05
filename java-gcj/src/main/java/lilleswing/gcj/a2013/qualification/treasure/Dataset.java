@@ -24,7 +24,7 @@ public class Dataset {
     }
 
 
-    public boolean canOpen(Chest chest) {
+    public boolean canOpen(Chest chest, final List<String> startKeys) {
         if(chest.isOpen()) {
             return false;
         }
@@ -87,21 +87,29 @@ public class Dataset {
         return true;
     }
 
+
+    /**
+     * This DFS is too slow figure out how to speed it up
+     * @param startKeys
+     * @param neededKeys
+     * @return
+     */
     public boolean touchAllKeys(final List<String> startKeys, final Set<String> neededKeys) {
         if(neededKeys.isEmpty()) {
             return true;
         }
         for(Chest chest: closedChests) {
-            if(!canOpen(chest)) {
+            if(!canOpen(chest, startKeys)) {
                 continue;
             }
             final List<String> newStartKeys = Lists.newArrayList(startKeys);
+            newStartKeys.remove(chest.getOpenKey());
             newStartKeys.addAll(chest.getContainedKeys());
             final Set<String> newNeededKeys = Sets.newHashSet(neededKeys);
             newNeededKeys.removeAll(chest.getContainedKeys());
-            //if(!betterKeySet(startKeys, newStartKeys, neededKeys, newNeededKeys)) {
-            //    continue;
-            //}
+            if(!betterKeySet(startKeys, newStartKeys, neededKeys, newNeededKeys)) {
+                continue;
+            }
             chest.open();
             boolean touched = touchAllKeys(newStartKeys, newNeededKeys);
             chest.unopen();

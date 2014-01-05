@@ -25,7 +25,7 @@ public class Treasure extends Problem<Dataset> {
             final List<Chest> trialChests = Lists.newArrayList(dataset.getClosedChests());
             Collections.sort(trialChests);
             for (Chest chest : trialChests) {
-                if (!dataset.canOpen(chest)) {
+                if (!dataset.canOpen(chest, dataset.getStartKeys())) {
                     continue;
                 }
                 dataset.openChest(chest);
