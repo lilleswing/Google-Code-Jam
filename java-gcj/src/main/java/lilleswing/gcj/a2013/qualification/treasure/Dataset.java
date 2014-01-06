@@ -53,7 +53,6 @@ public class Dataset {
         for(String key: chest.getContainedKeys()) {
             this.startKeys.remove(key);
         }
-        chests.add(chest);
         chest.unopen();
     }
 
