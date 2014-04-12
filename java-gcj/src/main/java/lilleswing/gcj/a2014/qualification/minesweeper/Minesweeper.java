@@ -14,6 +14,7 @@ import java.util.*;
  */
 public class Minesweeper extends Problem<Case> {
     private Map<Point, Map<Integer, String>> gridCache;
+    private static final int CACHE_SIZE = 7;
 
     @Override
     public String solve(Case aCase) {
@@ -39,7 +40,14 @@ public class Minesweeper extends Problem<Case> {
 
     @Override
     public void precompute() {
-        gridCache = Cache.getCache();
+        gridCache = Maps.newHashMap();
+        for (int r = 1; r <= CACHE_SIZE; r++) {
+            for (int c = 1; c <= CACHE_SIZE; c++) {
+                Board board = new Board(r, c);
+                final Point point = new Point(r, c);
+                gridCache.put(point, board.getGrids());
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -81,21 +89,6 @@ class Case {
     void setM(int m) {
         this.m = m;
     }
-}
-class Cache {
-    private static final int CACHE_SIZE = 7;
-    public static Map<Point, Map<Integer, String>> getCache() {
-        Map<Point, Map<Integer, String>> allGrids = Maps.newHashMap();
-        for(int r = 1; r<= CACHE_SIZE; r++) {
-            for(int c = 1; c <= CACHE_SIZE; c++) {
-                Board board = new Board(r,c);
-                final Point point = new Point(r,c);
-                allGrids.put(point, board.getGrids());
-            }
-        }
-        return allGrids;
-    }
-
 }
 
 class Board {
