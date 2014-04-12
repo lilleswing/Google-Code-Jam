@@ -9,6 +9,8 @@ import java.util.*;
 
 /**
  * NOTE(Leswing) Only works for small input
+ * Can probably reduce problems to 5/5 if enough mines (trivial if fewer)
+ * and then use the cached solutions
  */
 public class Minesweeper extends Problem<Case> {
     private Map<Point, Map<Integer, String>> gridCache;
