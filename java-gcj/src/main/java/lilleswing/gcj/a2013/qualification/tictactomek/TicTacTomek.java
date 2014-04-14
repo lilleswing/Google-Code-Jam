@@ -111,7 +111,7 @@ public class TicTacTomek extends Problem<DataSet> {
     }
 
     @Override
-    public void precompute() {
+    public void preCompute() {
     }
 
     public static void main(final String[] args) {

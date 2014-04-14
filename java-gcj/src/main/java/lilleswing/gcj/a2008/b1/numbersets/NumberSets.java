@@ -19,7 +19,7 @@ public class NumberSets extends Problem<DataSet> {
     private List<Long> primes;
 
     @Override
-    public void precompute() {
+    public void preCompute() {
         primes = PrimeSieve.sieve(1000001);
     }
 

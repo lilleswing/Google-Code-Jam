@@ -49,7 +49,7 @@ public class Lawnmower extends Problem<Dataset> {
     }
 
     @Override
-    public void precompute() {
+    public void preCompute() {
     }
 
     public static void main(String[] args) {

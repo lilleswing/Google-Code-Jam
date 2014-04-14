@@ -60,7 +60,7 @@ public class CropTriangles extends Problem<Case> {
     }
 
     @Override
-    public void precompute() {
+    public void preCompute() {
     }
 
     public static void main(String[] args) {

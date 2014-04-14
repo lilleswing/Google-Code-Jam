@@ -14,7 +14,7 @@ import java.util.Scanner;
 public abstract class Problem<T> {
     public abstract String solve(T t);
     public abstract List<T> parse(final String data);
-    public abstract void precompute();
+    public abstract void preCompute();
 
     public void display(final List<String> results, final String filename) {
         final String base = filename.substring(0, filename.lastIndexOf('.'));
@@ -40,7 +40,7 @@ public abstract class Problem<T> {
     }
 
     public void main(String filename) {
-        precompute();
+        preCompute();
         final String data = readLines(filename);
         final List<T> cases = parse(data);
         final List<String> results = Lists.transform(cases, new Function<T, String>() {
