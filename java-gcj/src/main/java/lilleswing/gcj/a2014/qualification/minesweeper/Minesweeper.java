@@ -39,7 +39,7 @@ public class Minesweeper extends Problem<Case> {
     }
 
     @Override
-    public void precompute() {
+    public void preCompute() {
         gridCache = Maps.newHashMap();
         for (int r = 1; r <= CACHE_SIZE; r++) {
             for (int c = 1; c <= CACHE_SIZE; c++) {
