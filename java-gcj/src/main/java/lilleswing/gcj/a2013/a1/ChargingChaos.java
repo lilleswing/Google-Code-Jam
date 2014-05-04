@@ -108,7 +108,7 @@ public class ChargingChaos extends Problem<Case> {
     }
 
     @Override
-    public void precompute() {
+    public void preCompute() {
     }
 
     public static void main(String[] args) {
