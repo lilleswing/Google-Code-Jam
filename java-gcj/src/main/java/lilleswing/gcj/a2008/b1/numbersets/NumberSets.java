@@ -9,7 +9,6 @@ import lilleswing.gcj.util.Problem;
 import lilleswing.gcj.util.datastructures.UnionFind;
 import lilleswing.gcj.util.math.PrimeSieve;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;

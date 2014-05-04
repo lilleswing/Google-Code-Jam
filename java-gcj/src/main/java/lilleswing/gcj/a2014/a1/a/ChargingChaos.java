@@ -1,9 +1,12 @@
-package lilleswing.gcj.a2014.a1;
+package lilleswing.gcj.a2014.a1.a;
 
 import com.google.common.collect.Lists;
 import lilleswing.gcj.util.Problem;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 public class ChargingChaos extends Problem<Case> {
     @Override
