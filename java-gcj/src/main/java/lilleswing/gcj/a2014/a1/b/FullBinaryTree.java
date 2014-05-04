@@ -17,7 +17,7 @@ public class FullBinaryTree extends Problem<Case> {
     public String solve(Case aCase) {
         final List<Integer> subTreeSizes = Lists.newArrayList();
         final List<Node> nodes = aCase.getGraph().getNodes();
-        for(Node node: nodes) {
+        for (Node node : nodes) {
             int size = subTreeSize(node, null);
             subTreeSizes.add(size);
         }
@@ -26,13 +26,13 @@ public class FullBinaryTree extends Problem<Case> {
 
     public int subTreeSize(Node toCheck, Node from) {
         final List<Node> children = toCheck.getToNodes();
-        if(children.size() == 1 ||
+        if (children.size() == 1 ||
                 children.size() == 2 && from != null && children.contains(from)) { // just the parent || only one child
             return 1; // just this node
         }
         final List<Integer> subTreeSizes = Lists.newArrayList();
-        for(Node child: children) {
-            if(child == from) {
+        for (Node child : children) {
+            if (child == from) {
                 continue;
             }
             subTreeSizes.add(subTreeSize(child, toCheck));
@@ -49,7 +49,7 @@ public class FullBinaryTree extends Problem<Case> {
         for (int i = 0; i < numCases; i++) {
             int n = sc.nextInt();
             UndirectedGraph g = new UndirectedGraph(n);
-            for(int j = 0; j < n - 1; j++) {
+            for (int j = 0; j < n - 1; j++) {
                 int from = sc.nextInt() - 1;
                 int to = sc.nextInt() - 1;
                 g.addEdge(from, to);
