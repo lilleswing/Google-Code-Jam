@@ -6,9 +6,6 @@ package lilleswing.gcj.a2013.qualification.tictactomek;
 import com.google.common.collect.Lists;
 import lilleswing.gcj.util.Problem;
 
-import java.io.BufferedReader;
-import java.io.StringReader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
