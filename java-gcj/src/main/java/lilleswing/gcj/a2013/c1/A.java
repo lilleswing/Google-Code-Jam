@@ -71,7 +71,7 @@ public class A extends Problem<Case> {
 
     @Override
     public void preCompute() {
-        vowels = Sets.newHashSet('a','e','i','o','u');
+        vowels = Sets.newHashSet('a', 'e', 'i', 'o', 'u');
     }
 
     public static void main(String[] args) {
