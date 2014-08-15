@@ -22,21 +22,19 @@ public class Case {
         for(int i = 0; i < tLimitValues.size(); i++) {
             indexMap.put(tLimitValues.get(i), i);
         }
-        for (final Long tLimitValue: tLimitValues) {
-            limits.add(indexMap.get(tLimitValue));
+        for (final Long tLimit: tLimits) {
+            limits.add(indexMap.get(tLimit));
         }
     }
 
     public int getSequences() {
         for(Integer limit: limits) {
-            System.out.println(map);
             final int toAdd = getToAdd(limit);
             final int originalValue = getOriginalValue(limit);
             final int unitySequence = 1;
             int total = modAdd(unitySequence, modAdd(toAdd, originalValue));
             map.put(limit, total);
         }
-        System.out.println(map);
         int sequences = 0;
         for (final Integer value: map.values()) {
             sequences = modAdd(sequences, value);
