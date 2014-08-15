@@ -14,6 +14,8 @@ import java.util.List;
  * (Note: this is a bit different from what is proposed in Fenwick's article.
  * To see why it makes sense, think about the trailing 1's in binary
  * representation of indexes.)
+ * NOTE (LESWING) can turn into an interface with an "add" method to not
+ * duplicate logic with ModFenwickTree
  */
 public class FenwickTree {
     private long[] tree;
