@@ -24,17 +24,17 @@ public class Case {
         long keyStrokes = 0;
         final List<Integer> keys = initializeKeys();
         int numFrequency = 0;
-        while(numFrequency != frequencies.size()) {
-            for (int i = 0; i < keys.size(); i++) {
-                if (numFrequency == frequencies.size()) {
-                    break;
-                }
-                int letterOccurrences = frequencies.get(numFrequency++);
-                int numLetterOnKey = keys.get(i);
-                numLetterOnKey++;
-                keys.set(i, numLetterOnKey);
-                keyStrokes += numLetterOnKey * letterOccurrences;
-            }
+        int keyIndex = 0;
+        while (numFrequency != frequencies.size()) {
+            int letterOccurrences = frequencies.get(numFrequency);
+            int numLetterOnKey = keys.get(keyIndex);
+            numLetterOnKey++;
+            keys.set(keyIndex, numLetterOnKey);
+            keyStrokes += numLetterOnKey * letterOccurrences;
+
+            // Update loop variables
+            numFrequency++;
+            keyIndex = (keyIndex + 1) % keys.size();
         }
         return keyStrokes;
     }
