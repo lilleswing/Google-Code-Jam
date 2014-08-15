@@ -2,14 +2,32 @@ package lilleswing.gcj.a2008.c1.c;
 
 import com.google.common.collect.Lists;
 import lilleswing.gcj.util.Problem;
+import lilleswing.gcj.util.datastructures.fenwicktree.ModFenwickTree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class C extends Problem<Case> {
+    final long MOD = 1000000007;
+
     @Override
     public String solve(Case aCase) {
-        return String.valueOf(aCase.getSequences());
+        final ModFenwickTree fenwickTree = new ModFenwickTree(zeros(aCase.getLimits().size()), MOD);
+        for (final Integer limit: aCase.getLimits()) {
+            long prev = fenwickTree.getsum(0, limit-1);
+            fenwickTree.increase(limit, prev+1); // One is the unity List
+        }
+        final long numSequences = fenwickTree.getsum(0, Collections.max(aCase.getLimits()));
+        return String.valueOf(numSequences);
+    }
+
+    public List<Long> zeros(final int length) {
+        final List<Long> list = Lists.newArrayListWithCapacity(length);
+        for(int i = 0; i < length; i++) {
+            list.add(0L);
+        }
+        return list;
     }
 
     @Override

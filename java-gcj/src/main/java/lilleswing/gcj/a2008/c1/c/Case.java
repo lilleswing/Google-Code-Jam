@@ -27,6 +27,10 @@ public class Case {
         }
     }
 
+    public List<Integer> getLimits() {
+        return limits;
+    }
+
     public int getSequences() {
         for(Integer limit: limits) {
             final int toAdd = getToAdd(limit);
