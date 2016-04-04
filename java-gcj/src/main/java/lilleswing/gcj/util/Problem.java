@@ -3,13 +3,17 @@
  */
 package lilleswing.gcj.util;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.IOUtils;
-
-import java.io.*;
-import java.util.List;
-import java.util.Scanner;
 
 public abstract class Problem<T> {
     public abstract String solve(T t);
@@ -43,12 +47,7 @@ public abstract class Problem<T> {
         preCompute();
         final String data = readLines(filename);
         final List<T> cases = parse(data);
-        final List<String> results = Lists.transform(cases, new Function<T, String>() {
-            @Override
-            public String apply(T t) {
-                return solve(t);
-            }
-        });
+        final List<String> results = Lists.transform(cases, this::solve);
         display(results, filename);
     }
 
