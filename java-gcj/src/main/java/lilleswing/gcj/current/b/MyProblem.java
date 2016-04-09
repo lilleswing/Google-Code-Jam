@@ -15,12 +15,19 @@ import org.apache.commons.io.IOUtils;
 public class MyProblem extends Problem<Case> {
     @Override
     public String solve(Case aCase) {
-        return null;
+        return aCase.countFlips();
     }
 
     @Override
     public List<Case> parse(String data) {
-        return null;
+        final Scanner sc = new Scanner(data);
+        final int t = sc.nextInt();
+        sc.nextLine();
+        final List<Case> cases = Lists.newArrayList();
+        for(int i = 0; i < t; i++) {
+            cases.add(new Case(sc.nextLine()));
+        }
+        return cases;
     }
 
     @Override
@@ -30,12 +37,61 @@ public class MyProblem extends Problem<Case> {
 
     public static void main(String[] args) {
         Problem problem = new MyProblem();
-        problem.main(args[0]);
+        problem.main("/Users/leswing/Documents/projects/Google-Code-Jam/java-gcj/src/main/java/lilleswing/gcj/current/b/sample.in");
     }
 }
 
 class Case {
-    public Case() {
+    String s;
+    char[] goal = new char[]{'+','-'};
+    int goalIndex;
+    int startIndex = 0;
+    int endIndex;
+    boolean isStart = true;
+    public Case(final String s) {
+        this.s = s;
+        this.endIndex = s.length() - 1;
+
+    }
+
+    public String countFlips() {
+        while(startIndex <= endIndex) {
+            char c = getChar();
+            char g = getGoal();
+            if (c == g) {
+                increment();
+
+            }
+        }
+    }
+
+    private char getChar() {
+        if (isStart) {
+            return s.charAt(startIndex);
+        }
+        return s.charAt(endIndex);
+    }
+
+    private void increment() {
+        if (isStart) {
+            startIndex += 1;
+            return;
+        }
+        endIndex += 1;
+        return;
+    }
+
+    private boolean isMatch() {
+        return getChar() == getGoal();
+    }
+
+    private void flipGoal() {
+        goalIndex = (goalIndex + 1) % 2;
+        isStart = !isStart;
+    }
+
+    private char getGoal() {
+        return goal[goalIndex];
     }
 }
 
