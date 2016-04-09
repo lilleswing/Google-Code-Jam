@@ -37,61 +37,38 @@ public class MyProblem extends Problem<Case> {
 
     public static void main(String[] args) {
         Problem problem = new MyProblem();
-        problem.main("/Users/leswing/Documents/projects/Google-Code-Jam/java-gcj/src/main/java/lilleswing/gcj/current/b/sample.in");
+        problem.main("/Users/leswing/Documents/projects/Google-Code-Jam/java-gcj/src/main/java/lilleswing/gcj/current/b/B-large.in");
     }
 }
 
 class Case {
     String s;
-    char[] goal = new char[]{'+','-'};
-    int goalIndex;
-    int startIndex = 0;
-    int endIndex;
-    boolean isStart = true;
+    char stackState;
     public Case(final String s) {
         this.s = s;
-        this.endIndex = s.length() - 1;
-
+        stackState = s.charAt(0);
     }
 
     public String countFlips() {
-        while(startIndex <= endIndex) {
-            char c = getChar();
-            char g = getGoal();
-            if (c == g) {
-                increment();
-
+        int total = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) != stackState) {
+                total++;
+                flipStackState();
             }
         }
-    }
-
-    private char getChar() {
-        if (isStart) {
-            return s.charAt(startIndex);
+        if (stackState == '-') {
+            total++;
         }
-        return s.charAt(endIndex);
+        return String.valueOf(total);
     }
 
-    private void increment() {
-        if (isStart) {
-            startIndex += 1;
+    private void flipStackState() {
+        if (stackState == '-') {
+            stackState = '+';
             return;
         }
-        endIndex += 1;
-        return;
-    }
-
-    private boolean isMatch() {
-        return getChar() == getGoal();
-    }
-
-    private void flipGoal() {
-        goalIndex = (goalIndex + 1) % 2;
-        isStart = !isStart;
-    }
-
-    private char getGoal() {
-        return goal[goalIndex];
+        stackState = '-';
     }
 }
 
