@@ -7,65 +7,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import lilleswing.gcj.util.math.PrimeSieve;
 import org.apache.commons.io.IOUtils;
 
 
 public class MyProblem extends Problem<Case> {
-
-    Set<Long> primes;
-
     @Override
     public String solve(Case aCase) {
-        for (final Long prime: primes) {
-            String base2String = Long.toString(prime, 2);
-            boolean isCoin = true;
-            for (int i = 3; i < 10; i++) {
-                int decimalValue = Integer.parseInt(base2String, i);
-                if (!primes.contains(decimalValue)) {
-                    isCoin = false;
-                    break;
-                }
-            }
-            if (isCoin) {
-                System.out.println(base2String);
-            }
-        }
-        return "FOO";
+        return null;
     }
 
     @Override
     public List<Case> parse(String data) {
-        Scanner sc = new Scanner(data);
-        int t = sc.nextInt();
-        List<Case> cases = Lists.newArrayList();
-        for(int i = 0; i < t; i++) {
-            cases.add(new Case(sc.nextInt(), sc.nextInt()));
-        }
-        return cases;
+        return null;
     }
 
     @Override
     public void preCompute() {
-        primes = Sets.newHashSet(PrimeSieve.sieve(65536));
+
     }
 
     public static void main(String[] args) {
         Problem problem = new MyProblem();
-        problem.main("/Users/leswing/Documents/projects/Google-Code-Jam/java-gcj/src/main/java/lilleswing/gcj/current/c/sample.in");
+        problem.main(args[0]);
     }
 }
 
 class Case {
-    int nbits;
-    int jcoins;
-    public Case(int n, int jcoins) {
-        this.nbits = n;
-        this.jcoins = jcoins;
+    public Case() {
     }
 }
 
