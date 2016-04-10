@@ -7,11 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import lilleswing.gcj.util.math.PrimeSieve;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -19,25 +16,33 @@ import org.apache.commons.io.IOUtils;
  */
 public class MyProblem extends Problem<Case> {
 
-    Set<Long> primes;
 
     @Override
     public String solve(Case aCase) {
-        for (final Long prime: primes) {
-            String base2String = Long.toString(prime, 2);
-            boolean isCoin = true;
-            for (int i = 3; i < 10; i++) {
-                int decimalValue = Integer.parseInt(base2String, i);
-                if (!primes.contains(decimalValue)) {
-                    isCoin = false;
-                    break;
+        String template = "11%s11%s11%s11%s11";
+        final List<String> coins = Lists.newArrayList();
+        for (int i = 0; i < aCase.nbits - 10; i++) {
+            for (int j = 0; j < aCase.nbits - 10 - i; j++) {
+                for (int k = 0; k < aCase.nbits -10 - i - j; k++) {
+                    int l = aCase.nbits - 10 - i - j - k;
+                    String output = String.format(template, zeroStr(i), zeroStr(j), zeroStr(k), zeroStr(l));
+                    coins.add(output + " 3 2 5 2 7 2 3 2 11");
+                    aCase.jcoins--;
+                    if (aCase.jcoins == 0) {
+                        return stringList(coins);
+                    }
                 }
             }
-            if (isCoin) {
-                System.out.println(base2String);
-            }
         }
-        return "FOO";
+        throw new RuntimeException("Need moar jamcoins");
+    }
+
+    private String stringList(List<String> coins) {
+        final StringBuilder sb = new StringBuilder();
+        for (final String coin : coins) {
+            sb.append("\n" + coin);
+        }
+        return sb.toString();
     }
 
     @Override
@@ -53,8 +58,16 @@ public class MyProblem extends Problem<Case> {
 
     @Override
     public void preCompute() {
-        primes = Sets.newHashSet(PrimeSieve.sieve(65536));
     }
+
+    private String zeroStr(int len) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            sb.append("0");
+        }
+        return sb.toString();
+    }
+
 
     public static void main(String[] args) {
         Problem problem = new MyProblem();
